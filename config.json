@@ -1,0 +1,73 @@
+{
+    "log": {
+        "access": "",
+        "error": "",
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "tag": "wg",
+            "listen": "0.0.0.0",
+            "port": 8291,
+            "protocol": "wireguard",
+            "domainStrategy": "ForceIPv4",
+            "settings": {
+                "secretKey": "kH19vP4Wf5DsEmCJXsbpIajeFgOACz94WO3GHrHV8WU=",
+                "address": [
+                    "100.64.13.2/32"
+                ],
+                "peers": [
+                    {
+                        "publicKey": "fv7FipE2/eipEJnj7Ai/bieooUhymtOB1ImYYZAbDgA=",
+                        "allowedIPs": [
+                            "0.0.0.0/0"
+                        ],
+                        "keepAlive": 10,
+                        "preSharedKey": ""
+                    }
+                ],
+                "kernelMode": false
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "socks",
+            "settings": {
+                "servers": [
+                    {
+                        "address": "172.16.2.6",
+                        "port": 14601
+                    }
+                ]
+            },
+            "tag": "out1"
+        },
+        {
+            "tag": "direct",
+            "protocol": "freedom",
+            "settings": {}
+        },
+        {
+            "tag": "block",
+            "protocol": "blackhole",
+            "settings": {
+                "response": {
+                    "type": "http"
+                }
+            }
+        }
+    ],
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "domainMatcher": "linear",
+        "rules": [
+            {
+                "type": "field",
+                "port": "0-65535",
+                "outboundTag": "out1",
+                "enabled": true
+            }
+        ]
+    }
+}
