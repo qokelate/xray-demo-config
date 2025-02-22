@@ -64,8 +64,27 @@
         "rules": [
             {
                 "type": "field",
-                "port": "0-65535",
+                "ip": [
+                    "100.64.0.0/10",
+                    "192.168.0.0/16",
+                    "172.16.0.0/12",
+                    "10.0.0.0/8"
+                ],
+                "outboundTag": "block",
+                "enabled": true
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "wg"
+                ],
                 "outboundTag": "out1",
+                "enabled": true
+            },
+            {
+                "type": "field",
+                "port": "0-65535",
+                "outboundTag": "block",
                 "enabled": true
             }
         ]
