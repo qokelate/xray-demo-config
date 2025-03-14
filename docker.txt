@@ -1,0 +1,8 @@
+
+docker run -d --name xray '--restart=unless-stopped' \
+-h 'xray.local' --net host -e 'TZ=Asia/Shanghai' \
+-e 'ENABLE_CJK_FONT=1' \
+-v /data1/xray:/data1/xray \
+--entrypoint=/data1/xray/xray \
+'alpine:latest' \
+run -c /data1/xray/config.json
